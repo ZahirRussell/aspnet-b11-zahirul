@@ -18,5 +18,13 @@ namespace XmlFormattingAssignment
             //ToDo XML Serialize
             return sb.ToString();
         }
+
+        private static void SerializeObject(object obj, string tagName, StringBuilder xmlBuilder)
+        {
+            if(obj == null)
+            {
+                //ToDo Append Null Properties
+            }
+        }
     }
 }
