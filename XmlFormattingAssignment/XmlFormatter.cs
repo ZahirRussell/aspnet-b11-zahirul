@@ -8,7 +8,15 @@ namespace XmlFormattingAssignment
     {
         public static string Convert(object obj)
         {
-            throw new NotImplementedException();
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            StringBuilder sb = new StringBuilder();
+            Type type = obj.GetType();
+            //ToDo XML Serialize
+            return sb.ToString();
         }
     }
 }
