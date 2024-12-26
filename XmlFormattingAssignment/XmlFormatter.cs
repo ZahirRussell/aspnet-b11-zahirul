@@ -24,7 +24,12 @@ namespace XmlFormattingAssignment
             if(obj == null)
             {
                 //ToDo Append Null Properties
+                AppendTag(xmlBuilder, tagName, null);
+                return;
             }
         }
+
+        private static void AppendTag(StringBuilder xmlBuilder, string tagName, string value) { xmlBuilder.Append(tagName); xmlBuilder.Append(value); }
+
     }
 }
