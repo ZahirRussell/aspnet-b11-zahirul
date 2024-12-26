@@ -19,12 +19,7 @@ class Program
                     City = "Dhaka",
                     Country = "Bangladesh"
                 },
-                PermanentAddress = new Address
-                {
-                    Street = "123 Main St",
-                    City = "Dhaka",
-                    Country = "Bangladesh"
-                },
+                
                 PhoneNumbers = new List<Phone>
                 {
                     new Phone { Number = "123456789", Extension = "001", CountryCode = "+880" },

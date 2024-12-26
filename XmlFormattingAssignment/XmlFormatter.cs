@@ -68,7 +68,17 @@ namespace XmlFormattingAssignment
             }
         }
 
-        private static void AppendTag(StringBuilder xmlBuilder, string tagName, string value) { xmlBuilder.Append(tagName); xmlBuilder.Append(value); }
+        private static void AppendTag(StringBuilder xmlBuilder, string tagName, string value)
+        {
+            if (value == null)
+            {
+                xmlBuilder.AppendLine($"<{tagName}></{tagName}>");
+            }
+            else
+            {
+                xmlBuilder.AppendLine($"<{tagName}>{value}</{tagName}>");
+            }
+        }
 
         private static void AppendOpeningTag(StringBuilder xmlBuilder, string tagName)
         {
