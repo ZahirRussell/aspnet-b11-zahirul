@@ -31,15 +31,16 @@ namespace XmlFormattingAssignment
 
             Type type = obj.GetType();
             //ToDO Append Plain Object
-            if (type.IsPrimitive ||
-                   type.IsEnum ||
-                   type == typeof(string) ||
-                   type == typeof(decimal) ||
-                   type == typeof(DateTime) ||
-                   type == typeof(Guid))
+            if (type == typeof(DateTime))
             {
-                AppendTag(xmlBuilder,tagName,obj.ToString());
+                string formattedDate = ((DateTime)obj).ToString("M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
+                AppendTag(xmlBuilder, tagName, formattedDate);
             }
+            else if (type.IsPrimitive || type.IsEnum || type == typeof(string) || type == typeof(decimal) || type == typeof(Guid))
+            {
+                AppendTag(xmlBuilder, tagName, obj.ToString());
+            }
+            //ToDO Append Complex Object
             else if (typeof(IEnumerable).IsAssignableFrom(type))
             {
                 AppendOpeningTag(xmlBuilder, tagName); // set openining tag
@@ -76,7 +77,8 @@ namespace XmlFormattingAssignment
             }
             else
             {
-                xmlBuilder.AppendLine($"<{tagName}>{value}</{tagName}>");
+                //xmlBuilder.AppendLine($"<{tagName}>{value}</{tagName}>");
+                xmlBuilder.AppendLine($"<{tagName}>{EscapeXml(value)}</{tagName}>");
             }
         }
 
@@ -88,6 +90,16 @@ namespace XmlFormattingAssignment
         private static void AppendClosingTag(StringBuilder xmlBuilder, string tagName)
         {
             xmlBuilder.AppendLine($"</{tagName}>");
+        }
+
+        private static string EscapeXml(string value)
+        {
+            return value
+                .Replace("&", "&amp;")
+                .Replace("<", "&lt;")
+                .Replace(">", "&gt;")
+                .Replace("\"", "&quot;")
+                .Replace("'", "&apos;");
         }
 
     }
